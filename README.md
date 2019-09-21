@@ -3,7 +3,7 @@
 guard-rails is an automated aws resource management and remediation system. It monitors all IAM actions, deployment types, environments and resource tags. This data is then used to decide whether the action done to an IAM resource is valid or not and determine the best response. Responses to invalid actions may include: notifying security, notifying the user, remediating the action immediately and archiving the resource created for some time and notifying the user of potential deletion. 
 
 
-# Main js files______________________________________________________________________________________________________
+# Main js files______________
 
 
 # MasterClass.js
