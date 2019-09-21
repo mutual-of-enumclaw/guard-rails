@@ -1,0 +1,43 @@
+service: remediation-que
+
+plugins:
+  - serverless-plugin-epsagon
+custom:
+  config: ${file(${opt:configFile, 'defaultConfig.yml'})}
+  epsagon: ${self:custom.config.epsagon}
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage, 'snd'}
+  region: ${opt:region, 'us-east-1'}
+  stackTags: ${self:custom.config.stackTags}
+
+  iamManagedPolicies:
+    - 'arn:aws:iam::aws:policy/IAMFullAccess'
+    - 'arn:aws:iam::aws:policy/AmazonSESFullAccess'
+    - 'arn:aws:iam::aws:policy/AmazonSQSFullAccess'
+
+functions: 
+  receiverFunction:
+    handler: DeleteUserSQS.handler
+    name: ${self:service}-lambda-${self:provider.stage}
+    timeout: 20
+    events:
+      - sqs:
+          enabled: true
+          batchSize: 10
+          arn:
+            Fn::GetAtt: [RemediationQue,Arn]
+
+#    Define function environment variables here
+    environment: ${self:custom.config.environment}
+
+resources:
+  Resources:
+    RemediationQue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${self:provider.stage}-${self:provider.region}
+        MessageRetentionPeriod: 172800
+        VisibilityTimeout: 45

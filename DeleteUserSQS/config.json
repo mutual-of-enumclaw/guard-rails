@@ -1,0 +1,22 @@
+{
+    "//comment":[
+        "contains a list of information needed to specify environment variables in test file",
+        "This file is only used for testing and is independant of a repository",
+        ""],
+
+
+    "region": "us-east-1",
+    "sndNum": "sndNum",
+    "devNum1": "d1",
+    "devNum2": "d2",
+    "prdNum1": "p1",
+    "prdNum2": "p2",
+    "securityEmail": "stevie@minecraft.com",
+    "internEmail1": "internEmail1@email.com",
+    "internEmail2": "internEmail2@email.com",
+    "sender": "thor@ragnarok.com",
+    "serverlessInfo": "daenerys-targaryen",
+    "tag1": "tag1",
+    "tag2": "tag2",
+    "tag3": "tag3"
+}

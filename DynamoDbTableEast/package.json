@@ -1,0 +1,18 @@
+{
+  "name": "@moe-tech/guard-rails-dynamodbtable",
+  "author": "Mutual of Enumclaw",
+  "publisher": "Mutual of Enumclaw",
+  "license": "LGPLv3",
+  "description": "Deploys a dynamodb table for temporarily storing resources without proper tags",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "epsagon": "^1.31.7"
+  },
+  "devDependencies": {
+    "serverless-plugin-epsagon": "^1.6.0"
+  }
+}

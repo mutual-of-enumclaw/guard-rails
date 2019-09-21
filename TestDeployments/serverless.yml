@@ -1,0 +1,254 @@
+#______________________ROLES__________________________
+service: test-resources
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: snd
+
+resources:
+  Resources:
+    Avocado:
+      Type: AWS::IAM::Role
+      Properties: 
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service: "iam.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Path: /
+        RoleName: Avocado@@@
+    Apple:
+      Type: AWS::IAM::Role
+      Properties: 
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service: "iam.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Path: /
+        RoleName: Apple@@@
+    Grape:
+      Type: AWS::IAM::Role
+      Properties: 
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service: "iam.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Path: /
+        RoleName: Grape@@@
+    Blueberry:
+      Type: AWS::IAM::Role
+      Properties: 
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service: "iam.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Path: /
+        RoleName: Blueberry@@@
+    Apricot:
+      Type: AWS::IAM::Role
+      Properties: 
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Principal:
+                Service: "iam.amazonaws.com"
+              Action:
+                - "sts:AssumeRole"
+        Path: /
+        RoleName: Apricot@@@
+
+# ______________________USERS__________________________
+# service: TestUsers
+
+# provider:
+#   name: aws
+#   runtime: nodejs10.x
+#   stage: snd
+
+# resources:
+#   Resources:
+    Dog:
+      Type: AWS::IAM::User
+      Properties:
+        Path: /
+        UserName: Dog@@@
+        LoginProfile:
+          Password: myP@ssW0rd
+    Cat:
+      Type: AWS::IAM::User
+      Properties:
+        Path: /
+        UserName: Cat@@@
+        LoginProfile:
+          Password: myP@ssW0rd
+    Fish:
+      Type: AWS::IAM::User
+      Properties:
+        Path: /
+        UserName: Fish@@@ 
+        LoginProfile:
+          Password: myP@ssW0rd
+    Bird:
+      Type: AWS::IAM::User
+      Properties:
+        Path: /
+        UserName: Bird@@@ 
+        LoginProfile:
+          Password: myP@ssW0rd
+    Cow:
+      Type: AWS::IAM::User
+      Properties:
+        Path: /
+        UserName: Cow@@@ 
+        LoginProfile:
+          Password: myP@ssW0rd
+
+# __________________________GROUPS__________________________
+# service: TestGroups
+
+# provider:
+#   name: aws
+#   runtime: nodejs10.x
+#   stage: snd
+
+# resources:
+#   Resources:
+    Lamborghini:
+      Type: AWS::IAM::Group
+      Properties: 
+        GroupName: Lamborghini@@@
+    Tesla:
+      Type: AWS::IAM::Group
+      Properties: 
+        GroupName: Tesla@@@
+    Bugatti:
+      Type: AWS::IAM::Group
+      Properties: 
+        GroupName: Bugatti@@@
+    Maserati:
+      Type: AWS::IAM::Group
+      Properties: 
+        GroupName: Maserati@@@
+    Ferrari:
+      Type: AWS::IAM::Group
+      Properties: 
+        GroupName: Ferrari@@@
+
+#______________________POLICIES__________________________
+# service: test-policies
+
+# provider:
+#   name: aws
+#   runtime: nodejs10.x
+#   stage: snd
+
+# resources:
+#   Resources:
+    MtDew:
+      Type: AWS::IAM::ManagedPolicy
+      Properties:
+        ManagedPolicyName: MtDew@@@
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Action: 
+                - "cloudformation:Describe*"
+              Resource: "*"
+        # Groups:
+        #   - Ref: Tesla
+        # Users:
+        #   - Ref: Dog
+        # Roles:
+        #   - Ref: Avocado
+    Coke:
+      Type: AWS::IAM::ManagedPolicy
+      Properties:
+        ManagedPolicyName: Coke@@@
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Action: 
+                - "cloudformation:List*"
+              Resource: "*"
+        # Groups:
+        #   - Ref: Lamborghini
+        # Users:
+        #   - Ref: Cat
+        # Roles:
+        #   - Ref: Apple
+    RootBeer:
+      Type: AWS::IAM::ManagedPolicy
+      Properties:
+        ManagedPolicyName: RootBeer@@@
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Action: 
+                - "cloudformation:Get*"
+              Resource: "*"
+        # Groups:
+        #   - Ref: Bugatti
+        # Users:
+        #   - Ref: Fish
+        # Roles:
+        #   - Ref: Grape
+    DrPepper:
+      Type: AWS::IAM::ManagedPolicy
+      Properties:
+        ManagedPolicyName: DrPepper@@@
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Action: 
+                - "cloudformation:Get*"
+              Resource: "*"
+        # Groups:
+        #   - Ref: Maserati
+        # Users:
+        #   - Ref: Bird
+        # Roles:
+        #   - Ref: Blueberry
+    Sprite:
+      Type: AWS::IAM::ManagedPolicy
+      Properties:
+        ManagedPolicyName: Sprite@@@
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Action: 
+                - "cloudformation:Describe*"
+                - "cloudformation:Get*"
+              Resource: "*"
+        # Groups:
+        #   - Ref: Ferrari
+        # Users:
+        #   - Ref: Cow
+        # Roles:
+        #   - Ref: Apricot

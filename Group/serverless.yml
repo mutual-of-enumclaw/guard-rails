@@ -1,0 +1,46 @@
+service: remediate-group-changes
+
+plugins:
+  - serverless-plugin-epsagon
+custom:
+  config: ${file(${opt:configFile, 'defaultConfig.yml'})}
+  epsagon: ${self:custom.config.epsagon}
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage, 'snd'}
+  region: ${opt:region, 'us-east-1'}
+  stackTags: ${self:custom.config.stackTags}
+
+  iamManagedPolicies:
+    - 'arn:aws:iam::aws:policy/AmazonSNSFullAccess'
+    - 'arn:aws:iam::aws:policy/IAMFullAccess'
+    - 'arn:aws:iam::aws:policy/AmazonSESFullAccess'
+
+functions:
+  remediateGroupChanges:
+    handler: RemediateGroups.handler
+    name: ${self:service}-${self:provider.stage}-${self:provider.region}
+    events:
+      - cloudwatchEvent:
+          event:
+            detail-type:
+            - AWS API Call via CloudTrail
+            source:
+            - aws.iam
+            detail:
+              eventSource:
+              - iam.amazonaws.com
+              eventName:
+              - PutGroupPolicy
+              - AttachGroupPolicy
+              - DetachGroupPolicy
+              - DeleteGroupPolicy
+              - CreateGroup
+              - DeleteGroup
+
+
+#    Define function environment variables here
+    environment: ${self:custom.config.environment}
+
