@@ -30,6 +30,6 @@ Remediates actions when possible or necessary based on launch type and tagging. 
 
 # DeleteUserSQS.js
 
-//Supporting function file that controls the remediation of creating a user. 
-//Invoked by SQS after some time, this function will delete the specified user.
-//SQS waits to invoke this function so the user has enough time to be created. 
+Supporting function file that controls the remediation of creating a user. 
+Invoked by SQS after some time, this function will delete the specified user.
+SQS waits to invoke this function so the user has enough time to be created. 
