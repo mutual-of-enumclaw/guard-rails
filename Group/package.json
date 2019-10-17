@@ -1,0 +1,20 @@
+{
+  "name": "@moe-tech/guard-rails-groups",
+  "author": "Mutual of Enumclaw",
+  "publisher": "Mutual of Enumclaw",
+  "license": "LGPLv3",
+  "description": "Remediates and manages actions done with the IAM Group service",
+  "version": "1.0.0",
+  "main": "RemediateGroups.js",
+  "dependencies": {
+    "epsagon": "^1.32.0"
+  },
+  "devDependencies": {
+    "aws-sdk-mock": "^4.5.0",
+    "jest": "^24.8.0",
+    "serverless-plugin-epsagon": "^1.6.0"
+  },
+  "scripts": {
+    "test": "npx jest"
+  }
+}

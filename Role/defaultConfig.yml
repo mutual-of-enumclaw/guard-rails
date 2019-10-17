@@ -1,0 +1,18 @@
+environment: 
+    region: ${self:provider.region}
+    name: ${self:service}-${self:provider.stage}-${self:provider.region}
+    environment: ${self:provider.stage}
+    securityEmail: jonsnow@thenorth.com
+    internEmail1: walterwhite@pollos.com
+    internEmail2: stevejobs@apple.com
+    sender: et@phonehome.com
+    serverlessInfo: demogorgon
+    devNum1: 1101001110
+    devNum2: 0000100100
+    prdNum1: 1010101010
+    prdNum2: 0011010100
+    tag1: Luke
+    tag2: Vader
+    tag3: Han
+
+    

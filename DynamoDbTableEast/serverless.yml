@@ -1,0 +1,55 @@
+service: remediation-db-table
+
+plugins:
+  - serverless-plugin-epsagon
+custom:
+  config: ${file(${opt:configFile, 'defaultConfig.yml'})}
+  epsagon: ${self:custom.config.epsagon}
+
+provider:
+  name: aws
+  versionFunctions: false
+  runtime: nodejs10.x
+  stage: ${opt:stage, 'snd'}
+  region: ${opt:region, 'us-east-1'}
+  stackTags: ${self:custom.config.stackTags}
+
+  iamManagedPolicies:
+    - 'arn:aws:iam::aws:policy/AmazonSNSFullAccess'
+    - 'arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
+
+resources:
+  Resources:
+    ShadowRealm:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${self:provider.stage}-ShadowRealm
+        StreamSpecification:
+          StreamViewType: OLD_IMAGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 100
+          WriteCapacityUnits: 100
+        AttributeDefinitions:
+          - AttributeName: ResourceName
+            AttributeType: S
+          - AttributeName: ResourceType
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ResourceName
+            KeyType: HASH
+          - AttributeName: ResourceType
+            KeyType: RANGE
+        TimeToLiveSpecification: 
+            AttributeName: KillTime
+            Enabled: True
+
+#-------------
+  Outputs:
+    DynamoStackArn:
+      Value: 
+        Fn::GetAtt:
+          - ShadowRealm
+          - StreamArn
+      Export:
+        Name: ${self:service}-${self:provider.stage}-ShadowRealm
+      
